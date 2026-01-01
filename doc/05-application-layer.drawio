@@ -1,0 +1,81 @@
+<mxfile host="app.diagrams.net" agent="Claude" version="24.0.0" type="device">
+  <diagram name="Application Layer" id="application-layer">
+    <mxGraphModel dx="2400" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO -->
+        <mxCell id="title" value="FILE SERVICE - APPLICATION LAYER (Use Cases)" style="text;html=1;strokeColor=none;fillColor=#e1d5e7;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=32;fontStyle=1;fontColor=#5a189a;" vertex="1" parent="1">
+          <mxGeometry x="300" y="40" width="1600" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- SECCION USE CASES -->
+        <mxCell id="usecase-section" value="USE CASES (Casos de Uso)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3e5f5;strokeColor=#9673a6;fontSize=24;fontStyle=1;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="100" y="180" width="2000" height="600" as="geometry" />
+        </mxCell>
+
+        <!-- GenerateUploadUrlUseCase -->
+        <mxCell id="uc1" value="&lt;b&gt;GenerateUploadUrlUseCase&lt;/b&gt;&lt;hr&gt;&lt;b&gt;Dependencies:&lt;/b&gt;&lt;br&gt;- fileRepository: IFileRepository&lt;br&gt;- fileStorage: IFileStorageAdapter&lt;hr&gt;&lt;b&gt;Input:&lt;/b&gt; UploadUrlRequest&lt;br&gt;  • fileName: string&lt;br&gt;  • fileSize: number&lt;br&gt;  • mimeType: string&lt;br&gt;  • ownerId: string&lt;hr&gt;&lt;b&gt;Output:&lt;/b&gt; UploadUrlResponse&lt;br&gt;  • fileId: string&lt;br&gt;  • uploadUrl: string&lt;br&gt;  • expiresAt: Date&lt;hr&gt;&lt;b&gt;Flujo:&lt;/b&gt;&lt;br&gt;1. Validar input (Zod)&lt;br&gt;2. Crear FileMetadata (validaciones dominio)&lt;br&gt;3. Crear File entity (PENDING)&lt;br&gt;4. Guardar metadata (Repository)&lt;br&gt;5. Generar URL (Storage Adapter)&lt;br&gt;6. Retornar DTO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;align=left;verticalAlign=top;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="140" y="240" width="380" height="500" as="geometry" />
+        </mxCell>
+
+        <!-- GenerateUploadPostUseCase -->
+        <mxCell id="uc2" value="&lt;b&gt;GenerateUploadPostUseCase&lt;/b&gt;&lt;hr&gt;&lt;b&gt;Dependencies:&lt;/b&gt;&lt;br&gt;- fileRepository: IFileRepository&lt;br&gt;- fileStorage: IFileStorageAdapter&lt;hr&gt;&lt;b&gt;Input:&lt;/b&gt; UploadPostRequest&lt;br&gt;  • fileName: string&lt;br&gt;  • fileSize: number&lt;br&gt;  • mimeType: string&lt;br&gt;  • ownerId: string&lt;hr&gt;&lt;b&gt;Output:&lt;/b&gt; UploadPostResponse&lt;br&gt;  • fileId: string&lt;br&gt;  • uploadUrl: string&lt;br&gt;  • expiresAt: Date&lt;br&gt;  • fields: Record&amp;lt;string, string&amp;gt;&lt;hr&gt;&lt;b&gt;Flujo:&lt;/b&gt;&lt;br&gt;1. Validar input (Zod)&lt;br&gt;2. Crear FileMetadata (validaciones dominio)&lt;br&gt;3. Crear File entity (PENDING)&lt;br&gt;4. Guardar metadata (Repository)&lt;br&gt;5. Generar POST URL con policy (Storage)&lt;br&gt;6. Retornar DTO con fields" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;align=left;verticalAlign=top;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="560" y="240" width="400" height="500" as="geometry" />
+        </mxCell>
+
+        <!-- GenerateDownloadUrlUseCase -->
+        <mxCell id="uc3" value="&lt;b&gt;GenerateDownloadUrlUseCase&lt;/b&gt;&lt;hr&gt;&lt;b&gt;Dependencies:&lt;/b&gt;&lt;br&gt;- fileRepository: IFileRepository&lt;br&gt;- fileStorage: IFileStorageAdapter&lt;hr&gt;&lt;b&gt;Input:&lt;/b&gt; DownloadUrlRequest&lt;br&gt;  • fileId: string&lt;br&gt;  • requesterId: string&lt;hr&gt;&lt;b&gt;Output:&lt;/b&gt; DownloadUrlResponse&lt;br&gt;  • downloadUrl: string&lt;br&gt;  • expiresAt: Date&lt;br&gt;  • fileName: string&lt;br&gt;  • fileSize: number&lt;hr&gt;&lt;b&gt;Flujo:&lt;/b&gt;&lt;br&gt;1. Validar input (Zod)&lt;br&gt;2. Buscar File por ID (Repository)&lt;br&gt;3. Validar permisos (owner = requester)&lt;br&gt;4. Validar estado (canBeDownloaded)&lt;br&gt;5. Generar URL download (Storage)&lt;br&gt;6. Retornar DTO" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=13;align=left;verticalAlign=top;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="240" width="380" height="500" as="geometry" />
+        </mxCell>
+
+        <!-- GetFileUseCase -->
+        <mxCell id="uc4" value="&lt;b&gt;GetFileUseCase&lt;/b&gt;&lt;hr&gt;&lt;b&gt;Dependencies:&lt;/b&gt;&lt;br&gt;- fileRepository: IFileRepository&lt;hr&gt;&lt;b&gt;Input:&lt;/b&gt; GetFileRequest&lt;br&gt;  • fileId: string&lt;br&gt;  • requesterId: string&lt;hr&gt;&lt;b&gt;Output:&lt;/b&gt; FileResponse&lt;br&gt;  • fileId: string&lt;br&gt;  • fileName: string&lt;br&gt;  • fileSize: number&lt;br&gt;  • mimeType: string&lt;br&gt;  • status: FileStatus&lt;br&gt;  • uploadedAt: Date&lt;hr&gt;&lt;b&gt;Flujo:&lt;/b&gt;&lt;br&gt;1. Validar input&lt;br&gt;2. Buscar File (Repository)&lt;br&gt;3. Validar permisos&lt;br&gt;4. Mapear a DTO&lt;br&gt;5. Retornar" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;align=left;verticalAlign=top;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="240" width="320" height="420" as="geometry" />
+        </mxCell>
+
+        <!-- DeleteFileUseCase -->
+        <mxCell id="uc5" value="&lt;b&gt;DeleteFileUseCase&lt;/b&gt;&lt;hr&gt;&lt;b&gt;Dependencies:&lt;/b&gt;&lt;br&gt;- fileRepository: IFileRepository&lt;hr&gt;&lt;b&gt;Input:&lt;/b&gt; DeleteFileRequest&lt;br&gt;  • fileId: string&lt;br&gt;  • requesterId: string&lt;hr&gt;&lt;b&gt;Output:&lt;/b&gt; void&lt;hr&gt;&lt;b&gt;Flujo:&lt;/b&gt;&lt;br&gt;1. Validar input&lt;br&gt;2. Buscar File (Repository)&lt;br&gt;3. Validar permisos&lt;br&gt;4. Marcar como DELETED&lt;br&gt;5. Actualizar en Repository" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;align=left;verticalAlign=top;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1780" y="240" width="280" height="380" as="geometry" />
+        </mxCell>
+
+        <!-- SECCION DTOs -->
+        <mxCell id="dto-section" value="DTOs (Data Transfer Objects)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=24;fontStyle=1;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="100" y="840" width="1000" height="300" as="geometry" />
+        </mxCell>
+
+        <!-- Request DTOs -->
+        <mxCell id="dtos-request" value="&lt;b&gt;REQUEST DTOs (con Zod validation)&lt;/b&gt;&lt;hr&gt;&lt;b&gt;UploadUrlRequest&lt;/b&gt;&lt;br&gt;  fileName: z.string().min(1).max(255)&lt;br&gt;  fileSize: z.number().positive()&lt;br&gt;  mimeType: z.string().regex(/^[a-z]+\/[a-z]+$/)&lt;br&gt;  ownerId: z.string().uuid()&lt;hr&gt;&lt;b&gt;DownloadUrlRequest&lt;/b&gt;&lt;br&gt;  fileId: z.string().uuid()&lt;br&gt;  requesterId: z.string().uuid()&lt;hr&gt;&lt;b&gt;GetFileRequest&lt;/b&gt;&lt;br&gt;  fileId: z.string().uuid()&lt;br&gt;  requesterId: z.string().uuid()&lt;hr&gt;&lt;b&gt;DeleteFileRequest&lt;/b&gt;&lt;br&gt;  fileId: z.string().uuid()&lt;br&gt;  requesterId: z.string().uuid()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;align=left;verticalAlign=top;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="140" y="900" width="440" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- Response DTOs -->
+        <mxCell id="dtos-response" value="&lt;b&gt;RESPONSE DTOs&lt;/b&gt;&lt;hr&gt;&lt;b&gt;UploadUrlResponse&lt;/b&gt;&lt;br&gt;  fileId: string&lt;br&gt;  uploadUrl: string&lt;br&gt;  expiresAt: Date&lt;hr&gt;&lt;b&gt;UploadPostResponse&lt;/b&gt;&lt;br&gt;  fileId: string&lt;br&gt;  uploadUrl: string&lt;br&gt;  expiresAt: Date&lt;br&gt;  fields: Record&amp;lt;string, string&amp;gt;&lt;hr&gt;&lt;b&gt;DownloadUrlResponse&lt;/b&gt;&lt;br&gt;  downloadUrl: string&lt;br&gt;  expiresAt: Date&lt;br&gt;  fileName: string&lt;br&gt;  fileSize: number&lt;hr&gt;&lt;b&gt;FileResponse&lt;/b&gt;&lt;br&gt;  fileId: string&lt;br&gt;  fileName: string&lt;br&gt;  fileSize: number&lt;br&gt;  mimeType: string&lt;br&gt;  status: string&lt;br&gt;  uploadedAt: string" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=13;align=left;verticalAlign=top;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="620" y="900" width="440" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- SECCION INFRASTRUCTURE INTERFACES -->
+        <mxCell id="infra-section" value="INFRASTRUCTURE INTERFACES (Puertos)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=24;fontStyle=1;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="840" width="940" height="300" as="geometry" />
+        </mxCell>
+
+        <!-- IFileStorageAdapter -->
+        <mxCell id="storage-adapter" value="&lt;b&gt;IFileStorageAdapter&lt;/b&gt;&lt;br&gt;(Implementado en Infrastructure)&lt;hr&gt;+ generateUploadUrl(&lt;br&gt;    location: FileLocation,&lt;br&gt;    metadata: FileMetadata&lt;br&gt;  ): Promise&amp;lt;{url, expiresAt}&amp;gt;&lt;hr&gt;+ generateUploadUrlWithPolicy(&lt;br&gt;    location: FileLocation,&lt;br&gt;    metadata: FileMetadata&lt;br&gt;  ): Promise&amp;lt;{url, expiresAt, fields}&amp;gt;&lt;hr&gt;+ generateDownloadUrl(&lt;br&gt;    location: FileLocation&lt;br&gt;  ): Promise&amp;lt;{url, expiresAt}&amp;gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=13;align=left;verticalAlign=top;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="900" width="420" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- IFileRepository reminder -->
+        <mxCell id="repo-reminder" value="&lt;b&gt;IFileRepository&lt;/b&gt;&lt;br&gt;(Definido en Domain)&lt;hr&gt;+ save(file: File)&lt;br&gt;+ findById(id: string)&lt;br&gt;+ findByOwnerId(id: string)&lt;br&gt;+ delete(id: string)&lt;br&gt;+ updateStatus(id, status)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=13;align=left;verticalAlign=top;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1660" y="900" width="400" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- NOTAS -->
+        <mxCell id="notes" value="&lt;b&gt;PRINCIPIOS APPLICATION LAYER:&lt;/b&gt;&lt;hr&gt;✅ Use Cases = Casos de uso del negocio&lt;br&gt;✅ Orquesta Domain + Infrastructure&lt;br&gt;✅ Validación de INPUT con Zod (formato)&lt;br&gt;✅ Validación de NEGOCIO con Value Objects&lt;br&gt;✅ DTOs para entrada/salida (NO expone Domain)&lt;br&gt;✅ Inyección de dependencias (Repository + Adapters)&lt;br&gt;&lt;br&gt;❌ NO conoce detalles de S3, DynamoDB, Lambda&lt;br&gt;❌ NO conoce HTTP, API Gateway&lt;br&gt;❌ NO tiene lógica de negocio (está en Domain)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff4e6;strokeColor=#d79b00;fontSize=14;align=left;verticalAlign=top;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="100" y="1200" width="2000" height="180" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
