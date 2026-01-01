@@ -1,5 +1,5 @@
-import * as cdk from 'aws-cdk-lib/core';
-import { Construct } from 'constructs';
+import * as cdk from "aws-cdk-lib/core";
+import { Construct } from "constructs";
 // import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class FileServiceStack extends cdk.Stack {
@@ -9,7 +9,7 @@ export class FileServiceStack extends cdk.Stack {
     // The code that defines your stack goes here
 
     // example resource
-    // const queue = new sqs.Queue(this, 'FileServiceQueue', {
+    // const queue = new sqs.Queue(tFileServiceQueue', {
     //   visibilityTimeout: cdk.Duration.seconds(300)
     // });
   }

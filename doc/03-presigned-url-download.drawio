@@ -1,0 +1,108 @@
+<mxfile host="app.diagrams.net" modified="2024-12-24T00:00:00.000Z" agent="Claude" version="22.1.0" type="device">
+  <diagram name="Presigned URL Download" id="presigned-url-download">
+    <mxGraphModel dx="2000" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1000" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO -->
+        <mxCell id="title" value="FLUJO 3: PRESIGNED URL DOWNLOAD" style="text;html=1;strokeColor=none;fillColor=#ffebee;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=28;fontStyle=1;fontColor=#CC0000;" vertex="1" parent="1">
+          <mxGeometry x="400" y="40" width="1000" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- CLIENTE -->
+        <mxCell id="client" value="&lt;b&gt;Cliente&lt;/b&gt;&lt;br&gt;(Web/Mobile)" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#ffebee;strokeColor=#CC0000;fontSize=16;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="100" y="400" width="120" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- API GATEWAY -->
+        <mxCell id="apigw" value="&lt;b&gt;API Gateway&lt;/b&gt;&lt;br&gt;REST API" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=#FF4F8B;gradientDirection=north;fillColor=#BC1356;strokeColor=#CC0000;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=16;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.api_gateway;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="400" y="420" width="120" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- LAMBDA -->
+        <mxCell id="lambda3" value="&lt;b&gt;generateDownloadUrl&lt;/b&gt;&lt;br&gt;&lt;br&gt;Lambda Handler" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#D45B07;strokeColor=#CC0000;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=16;fontStyle=1;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.lambda_function;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="700" y="420" width="120" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- USE CASE -->
+        <mxCell id="usecase3" value="&lt;b&gt;Use Case&lt;/b&gt;&lt;br&gt;&lt;br&gt;GenerateDownloadUrl" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontColor=#333333;fontSize=16;fontStyle=1;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="410" width="180" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- S3 BUCKET -->
+        <mxCell id="s3" value="&lt;b&gt;S3 Bucket&lt;/b&gt;&lt;br&gt;&lt;br&gt;file-service-uploads" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#277116;strokeColor=#00CC00;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=16;fontStyle=1;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.bucket;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="410" width="120" height="125" as="geometry" />
+        </mxCell>
+
+        <!-- DYNAMODB -->
+        <mxCell id="dynamodb" value="&lt;b&gt;DynamoDB&lt;/b&gt;&lt;br&gt;&lt;br&gt;FileMetadata" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#4D27AA;strokeColor=#9673a6;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=16;fontStyle=1;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.dynamodb;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="700" width="120" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- PASO 1 -->
+        <mxCell id="step1" value="&lt;b&gt;PASO 1&lt;/b&gt;&lt;br&gt;GET /files/{fileId}/download" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;strokeColor=#CC0000;fontSize=14;fontStyle=1;" edge="1" parent="1" source="client" target="apigw">
+          <mxGeometry x="0.1" y="20" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PASO 2 -->
+        <mxCell id="step2" value="&lt;b&gt;PASO 2&lt;/b&gt;&lt;br&gt;Invoke Lambda" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;strokeColor=#CC0000;fontSize=14;fontStyle=1;" edge="1" parent="1" source="apigw" target="lambda3">
+          <mxGeometry x="0.1" y="-20" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PASO 3 -->
+        <mxCell id="step3" value="&lt;b&gt;PASO 3&lt;/b&gt;&lt;br&gt;Execute Use Case" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;strokeColor=#CC0000;fontSize=14;fontStyle=1;" edge="1" parent="1" source="lambda3" target="usecase3">
+          <mxGeometry x="0.1" y="-20" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PASO 4 -->
+        <mxCell id="step4" value="&lt;b&gt;PASO 4&lt;/b&gt;&lt;br&gt;Get Metadata&lt;br&gt;(validar que existe)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;strokeColor=#CC0000;fontSize=14;fontStyle=1;" edge="1" parent="1" source="usecase3" target="dynamodb">
+          <mxGeometry x="0.1" y="30" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PASO 5 -->
+        <mxCell id="step5" value="&lt;b&gt;PASO 5&lt;/b&gt;&lt;br&gt;S3.getSignedUrl(GET)&lt;br&gt;(genera URL temporal)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;strokeColor=#CC0000;dashed=1;fontSize=14;fontStyle=1;" edge="1" parent="1" source="usecase3" target="s3">
+          <mxGeometry x="0.1" y="-30" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PASO 6 -->
+        <mxCell id="step6" value="&lt;b&gt;PASO 6&lt;/b&gt;&lt;br&gt;Return Download URL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=4;strokeColor=#00CC00;dashed=1;fontSize=14;fontStyle=1;" edge="1" parent="1" source="lambda3" target="client">
+          <mxGeometry x="0.1" y="40" relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="760" y="280" />
+              <mxPoint x="160" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- PASO 7 -->
+        <mxCell id="step7" value="&lt;b&gt;PASO 7&lt;/b&gt;&lt;br&gt;GET (descargar archivo)&lt;br&gt;DIRECTO DESDE S3&lt;br&gt;(SIN pasar por Lambda)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=6;strokeColor=#FF6600;fontSize=14;fontStyle=1;" edge="1" parent="1" source="client" target="s3">
+          <mxGeometry x="0.2" y="50" relative="1" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="160" y="650" />
+              <mxPoint x="1400" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- NOTAS -->
+        <mxCell id="notes" value="&lt;b&gt;NOTAS CLAVE:&lt;/b&gt;&lt;br&gt;&lt;br&gt;✅ DynamoDB verifica que el archivo exista antes de generar URL&lt;br&gt;✅ URL temporal expira en ~15 minutos (más corto que upload)&lt;br&gt;✅ Cliente descarga DIRECTAMENTE desde S3&lt;br&gt;✅ No carga el servidor con tráfico de archivos" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffebee;strokeColor=#CC0000;verticalAlign=top;fontSize=14;fontStyle=0;align=left;" vertex="1" parent="1">
+          <mxGeometry x="100" y="700" width="600" height="160" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

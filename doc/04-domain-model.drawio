@@ -1,0 +1,109 @@
+<mxfile host="app.diagrams.net" agent="Claude" version="24.0.0" type="device">
+  <diagram name="Domain Model" id="domain-model">
+    <mxGraphModel dx="2400" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- TITULO -->
+        <mxCell id="title" value="FILE SERVICE - DOMAIN MODEL (PURO NEGOCIO)" style="text;html=1;strokeColor=none;fillColor=#d5e8d4;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=1;fontSize=32;fontStyle=1;fontColor=#2e7d32;" vertex="1" parent="1">
+          <mxGeometry x="300" y="40" width="1400" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- SECCION VALUE OBJECTS -->
+        <mxCell id="vo-section" value="VALUE OBJECTS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=20;fontStyle=1;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="100" y="180" width="1200" height="340" as="geometry" />
+        </mxCell>
+
+        <!-- FileStatus -->
+        <mxCell id="filestatus" value="&lt;b&gt;&amp;lt;&amp;lt;Enum&amp;gt;&amp;gt;&lt;/b&gt;&lt;br&gt;&lt;b&gt;FileStatus&lt;/b&gt;&lt;hr&gt;PENDING&lt;br&gt;UPLOADED&lt;br&gt;DELETED" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=14;align=left;verticalAlign=top;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="140" y="240" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- FileMetadata -->
+        <mxCell id="metadata" value="&lt;b&gt;&amp;lt;&amp;lt;ValueObject&amp;gt;&amp;gt;&lt;/b&gt;&lt;br&gt;&lt;b&gt;FileMetadata&lt;/b&gt;&lt;hr&gt;- fileName: string&lt;br&gt;- fileSize: number&lt;br&gt;- mimeType: string&lt;br&gt;- uploadedAt: Date&lt;br&gt;- ownerId: string&lt;hr&gt;+ isImage(): boolean&lt;br&gt;+ isPDF(): boolean&lt;br&gt;+ getSizeInMB(): number" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;align=left;verticalAlign=top;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="380" y="240" width="280" height="240" as="geometry" />
+        </mxCell>
+
+        <!-- FileLocation -->
+        <mxCell id="filelocation" value="&lt;b&gt;&amp;lt;&amp;lt;ValueObject&amp;gt;&amp;gt;&lt;/b&gt;&lt;br&gt;&lt;b&gt;FileLocation&lt;/b&gt;&lt;hr&gt;- container: string&lt;br&gt;- path: string&lt;hr&gt;+ getFullPath(): string" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;align=left;verticalAlign=top;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="700" y="240" width="240" height="160" as="geometry" />
+        </mxCell>
+
+        <!-- SECCION ENTITY -->
+        <mxCell id="entity-section" value="ENTITY" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=20;fontStyle=1;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="100" y="560" width="600" height="300" as="geometry" />
+        </mxCell>
+
+        <!-- File Entity -->
+        <mxCell id="file" value="&lt;b&gt;&amp;lt;&amp;lt;Entity&amp;gt;&amp;gt;&lt;/b&gt;&lt;br&gt;&lt;b&gt;File&lt;/b&gt;&lt;hr&gt;- id: string&lt;br&gt;- metadata: FileMetadata&lt;br&gt;- location: FileLocation&lt;br&gt;- status: FileStatus&lt;hr&gt;+ markAsUploaded(): void&lt;br&gt;+ markAsDeleted(): void&lt;br&gt;+ canBeDownloaded(): boolean" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;align=left;verticalAlign=top;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="140" y="620" width="320" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- SECCION REPOSITORY -->
+        <mxCell id="repo-section" value="REPOSITORY INTERFACE (Solo Persistencia)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=20;fontStyle=1;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="760" y="560" width="540" height="300" as="geometry" />
+        </mxCell>
+
+        <!-- IFileRepository -->
+        <mxCell id="repository" value="&lt;b&gt;&amp;lt;&amp;lt;Interface&amp;gt;&amp;gt;&lt;/b&gt;&lt;br&gt;&lt;b&gt;IFileRepository&lt;/b&gt;&lt;hr&gt;+ save(file: File): Promise&amp;lt;void&amp;gt;&lt;br&gt;+ findById(id: string): Promise&amp;lt;File|null&amp;gt;&lt;br&gt;+ findByOwnerId(id: string): Promise&amp;lt;File[]&amp;gt;&lt;br&gt;+ delete(id: string): Promise&amp;lt;void&amp;gt;&lt;br&gt;+ updateStatus(id: string, status: FileStatus): Promise&amp;lt;void&amp;gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;align=left;verticalAlign=top;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="800" y="620" width="460" height="200" as="geometry" />
+        </mxCell>
+
+        <!-- SECCION ERRORS -->
+        <mxCell id="errors-section" value="DOMAIN ERRORS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=20;fontStyle=1;verticalAlign=top;align=center;" vertex="1" parent="1">
+          <mxGeometry x="100" y="920" width="600" height="240" as="geometry" />
+        </mxCell>
+
+        <!-- Errors List -->
+        <mxCell id="errors" value="&lt;b&gt;FileSizeExceededError&lt;/b&gt;&lt;br&gt;- fileSize: number&lt;br&gt;- maxSize: number&lt;hr&gt;&lt;b&gt;InvalidFileTypeError&lt;/b&gt;&lt;br&gt;- mimeType: string&lt;br&gt;- allowedTypes: string[]&lt;hr&gt;&lt;b&gt;FileNotFoundError&lt;/b&gt;&lt;br&gt;- fileId: string&lt;hr&gt;&lt;b&gt;InvalidFileNameError&lt;/b&gt;&lt;br&gt;- fileName: string" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffcccc;strokeColor=#cc0000;fontSize=13;align=left;verticalAlign=top;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="140" y="980" width="520" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- RELACIONES -->
+        <!-- File -> FileMetadata -->
+        <mxCell id="rel1" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;strokeWidth=2;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="file" target="metadata">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="340" y="570" />
+              <mxPoint x="340" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- File -> FileLocation -->
+        <mxCell id="rel2" value="" style="endArrow=diamondThin;endFill=1;endSize=24;html=1;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="file" target="filelocation">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="550" y="720" />
+              <mxPoint x="550" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- File -> FileStatus -->
+        <mxCell id="rel3" value="" style="endArrow=open;endFill=0;endSize=12;html=1;strokeWidth=2;dashed=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="file" target="filestatus">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Repository -> File -->
+        <mxCell id="rel4" value="uses" style="endArrow=open;endFill=0;endSize=12;html=1;strokeWidth=2;dashed=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="repository" target="file">
+          <mxGeometry x="-0.1" y="10" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- NOTA IMPORTANTE -->
+        <mxCell id="note" value="&lt;b&gt;PRINCIPIOS CLEAN ARCHITECTURE:&lt;/b&gt;&lt;br&gt;&lt;br&gt;✅ Domain = PURO NEGOCIO (gestionar archivos)&lt;br&gt;✅ NO conoce S3, DynamoDB, Lambda, AWS&lt;br&gt;✅ NO conoce URLs, presigned, HTTP&lt;br&gt;✅ Value Objects se autovalididan (reglas de negocio)&lt;br&gt;✅ Repository = SOLO persistencia (save, find, delete)&lt;br&gt;&lt;br&gt;❌ Generar URLs → Use Case + Infrastructure Adapter&lt;br&gt;❌ S3 SDK → Infrastructure Layer&lt;br&gt;❌ API Gateway/Lambda → Infrastructure Layer" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff4e6;strokeColor=#d79b00;fontSize=13;align=left;verticalAlign=top;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="760" y="920" width="540" height="240" as="geometry" />
+        </mxCell>
+
+        <!-- LEYENDA -->
+        <mxCell id="legend" value="&lt;b&gt;LEYENDA:&lt;/b&gt;&lt;br&gt;&lt;br&gt;◆ Composición&lt;br&gt;---&amp;gt; Dependencia&lt;br&gt;━━&amp;gt; Usa" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=14;align=left;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="1360" y="180" width="180" height="120" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
